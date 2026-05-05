@@ -169,7 +169,7 @@ def generate_invoice(invoice):
         ws.cell(row=10, column=2).value = invoice["attn"]
         ws.cell(row=11, column=2).value = invoice["email"]
         ws.cell(row=9, column=7).value = f"{current_page}/{total_page}"
-        ws.cell(row=10, column=7).value = invoice["invoice_no"]
+        ws.cell(row=10, column=7).value = invoice["invoice_no"].replace('/', '-')
         ws.cell(row=11, column=7).value = invoice["date"]
             
 
@@ -463,7 +463,7 @@ def generate_invoice(invoice):
 
     os.makedirs(output_dir, exist_ok=True)
 
-    base_name = f"Invoice_{invoice['invoice_no']}"
+    base_name = f"Invoice_{invoice['invoice_no'].replace('/', '-')}"
     output_file = os.path.join(output_dir, base_name + ".xlsx")
 
     i = 1
